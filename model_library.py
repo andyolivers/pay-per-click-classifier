@@ -4,7 +4,7 @@ from sklearn import svm
 from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
-
+from skopt.space import Real, Categorical, Integer
 
 class classification_models:
     def __init__(self):
@@ -58,10 +58,10 @@ class naive_bayes:
 class knn:
     model = KNeighborsClassifier()
 
-    parameters = {'model__n_neighbors': [3, 4, 5, 10, 15, 20],
-                  'model__weights': ['uniform', 'distance'],
-                  'model__algorithm': ['auto', 'ball_tree', 'kd_tree', 'brute'],
-                  'model__leaf_size': [5, 10, 20, 30, 50]
+    parameters = {'model__n_neighbors': Integer(3, 20),
+                  'model__weights': Categorical(categories=['uniform', 'distance']),
+                  'model__algorithm': Categorical(categories=['auto', 'ball_tree', 'kd_tree', 'brute']),
+                  'model__leaf_size': Integer(5, 50)
                   }
 
     @staticmethod
@@ -88,14 +88,15 @@ class xgboost:
     model = xgb.XGBClassifier()
 
     parameters = {
-                   'model__learning_rate': [0.01,0.1,0.5,1],
-                   'model__max_depth': [2,4,8,12,16,20,30],
-                   'model__min_samples_leaf': [2,5,10,30,60,90,120],
-                   'model__min_samples_split': [2,5,10,30,60,90,120],
-                   'model__subsample': [0.5,0.8,1],
-                   'model__n_estimators': [5,10,15,25,50],
+                   'model__learning_rate': Real(0.1,1.0,'uniform'),
+                   'model__max_depth': Integer(2, 100),
+                   'model__min_samples_leaf': Integer(2, 100),
+                   'model__min_samples_split': Integer(2, 100),
+                   'model__subsample': Real(0.1,1.0,'uniform'),
+                   'model__n_estimators': Integer(10, 100),
                    'model__random_state': [16]
                  }
+
 
     @staticmethod
     def best_model(params):

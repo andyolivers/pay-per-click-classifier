@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/pay-per-click-classifier.iml" filepath="$PROJECT_DIR$/.idea/pay-per-click-classifier.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/siemens.iml" filepath="$PROJECT_DIR$/.idea/siemens.iml" />
     </modules>
   </component>
 </project>
